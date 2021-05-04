@@ -13,7 +13,7 @@
     width: 1362px;
     height: 482px;
     background: url("images/space_background.jpg") repeat-x;
-    animation: slide 60s linear infinite;
+    animation: slide 10s linear infinite;
 }
 
 .game-container {
@@ -59,6 +59,6 @@
     transform: translate3d(0, 0, 0);
   }
   100%{
-    transform: translate3d(-1362px, 0, 0);
+    transform: translate3d(-908px, 0, 0);
   }
 }
