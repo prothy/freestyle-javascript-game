@@ -1,19 +1,28 @@
 .full-screen {
     width: 100%;
     height: auto;
-    background: url("images/screen.jpg");
+    background-image: url("images/screen.jpg");
     position: absolute;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+.sliding-background {
+    width: 1362px;
+    height: 482px;
+    background: url("images/space_background.jpg") repeat-x;
+    animation: slide 60s linear infinite;
 }
 
 .game-container {
-    width: 500px;
-    height: 730px;
-    background: url("images/space_background.jpg");
-    background-size: 2066px 730px;
-    background-position: left;
+    width: 454px;
+    height: 482px;
     position: absolute;
 }
 
+/*
 .sky {
     width: 500px;
     height: 580px;
@@ -26,21 +35,30 @@
     height: 150px;
     position: absolute;
     top: 580px;
-}
+} */
 
 .bird {
-    background: url("images/UFO_spaceship.png");
+    background-image: url("images/UFO_spaceship.png");
     width: 60px;
     height: 33px;
     position: absolute;
 }
 
 .upper_pipe {
-    background: url("images/upper_pipe.png");
+    background-image: url("images/upper_pipe.png");
     position: relative;
 }
 
 .lower_pipe {
-    background: url("images/lower_pipe.png");
+    background-image: url("images/lower_pipe.png");
     position: relative;
+}
+
+@keyframes slide {
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(-1362px, 0, 0);
+  }
 }
