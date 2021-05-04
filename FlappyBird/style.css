@@ -1,11 +1,13 @@
 .game-container {
     width: 500px;
     height: 730px;
+    background: url("images/background.png");
+    background-size: 414px 730px;
+    background-position: left;
     position: absolute;
 }
 
 .sky {
-    background-color: lightblue;
     width: 500px;
     height: 580px;
     position: absolute;
