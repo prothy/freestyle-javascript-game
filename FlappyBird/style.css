@@ -20,8 +20,9 @@
 }
 
 .bird {
-    background: url("images/bird.jpg");
+    background: url("images/bird_sized.jpg");
+    /* Original size: 475 x 339 */
     width: 60px;
-    height: 45px;
+    height: 43px;
     position: absolute;
 }
