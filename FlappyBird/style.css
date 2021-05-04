@@ -1,11 +1,20 @@
+.full-screen {
+    width: 100%;
+    height: auto;
+    background: url("images/screen.jpg");
+    position: absolute;
+}
+
 .game-container {
     width: 500px;
     height: 730px;
+    background: url("images/space_background.jpg");
+    background-size: 2066px 730px;
+    background-position: left;
     position: absolute;
 }
 
 .sky {
-    background-color: lightblue;
     width: 500px;
     height: 580px;
     position: absolute;
@@ -20,8 +29,18 @@
 }
 
 .bird {
-    background: url("images/bird.jpg");
+    background: url("images/UFO_spaceship.png");
     width: 60px;
-    height: 43px;
+    height: 33px;
     position: absolute;
+}
+
+.upper_pipe {
+    background: url("images/upper_pipe.png");
+    position: relative;
+}
+
+.lower_pipe {
+    background: url("images/lower_pipe.png");
+    position: relative;
 }

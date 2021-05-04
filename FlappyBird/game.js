@@ -15,14 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const ground = document.querySelector('.ground');
 
     const gravity = -10   // gravitational acceleration
+    let time = Date.now()
     const interval = 20   // milliseconds per update
 
     let birdLeft = 220;
     let birdBottom = 100;
-    let gravity = 2;
+    // let gravity = 2;
 
     function startGame() {
-        birdBottom -= gravity
+        birdBottom > 0 ? birdBottom += ((gravity * ((time-Date.now())/50)**2)) : birdBottom = 0
+        console.log((gravity * ((time-Date.now())/100)**2))*10
+        time = Date.now();
         bird.style.bottom = birdBottom + 'px';
         bird.style.left = birdLeft + 'px';
     }
