@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameDisplay = document.querySelector('.game-container');
     const ground = document.querySelector('.ground');
 
+    const gravity = -10   // gravitational acceleration
+    const interval = 20   // milliseconds per update
+
     let birdLeft = 220;
     let birdBottom = 100;
     let gravity = 2;
@@ -23,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bird.style.bottom = birdBottom + 'px';
         bird.style.left = birdLeft + 'px';
     }
-    let timerId = setInterval(startGame, 20);
+    let timerId = setInterval(startGame, interval);
 
 
     function jump() {
