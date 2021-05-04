@@ -1,4 +1,4 @@
-import number from './number.js'
+import number from './number.js';
 
 const grid = {
     gridElement: document.getElementsByClassName('grid')[0],
@@ -22,6 +22,22 @@ const grid = {
         //Create the first number and start the game:
         number.spawn();
         this.playable = true;
+    },
+    randomEmptyCellIndex: function () {
+        let emptyCells = [];
+
+        for (let i = 0; i < this.cells.length; i++) {
+            if (this.cells[i].number === null) {
+                emptyCells.push(i);
+            }
+        }
+
+        //Game over condition:
+        if(emptyCells.length === 0) {
+            return false;
+        }
+
+        return emptyCells[Math.floor(Math.random() * emptyCells.length)]
     }
 }
 
