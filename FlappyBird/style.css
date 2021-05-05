@@ -22,6 +22,18 @@
     animation: slide 10s linear infinite;
 }
 
+.score-container {
+    top: 0px;
+    left: 280px;
+    right: 454px;
+    background-image: url("images/score_background.png");
+}
+
+.score {
+    right: 25px;
+    /* mask-image: url("images/numbers/0.png"); */
+}
+
 .game-container {
     width: 454px;
     height: 482px;
