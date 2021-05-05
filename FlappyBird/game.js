@@ -114,15 +114,6 @@ function CheckCollision()
 
 function Compare(bird, obstacle)
 {
-
-    /*
-    Azért használok 2 betűs változókat mert különben nem férne ki az egész feltétel a képernyőre.
-    A változónevek az objektum (bird/obstacle) első betűjéből
-    és a kulcs (top/bottom/right/left) első betűjéből tevődnek össze.
-    Ebből az oldalból indultam ki:
-    https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-     */
-
     const bt = bird.getBoundingClientRect().top;
     const bb = bird.getBoundingClientRect().bottom;
     const bl = bird.getBoundingClientRect().left;
