@@ -30,7 +30,7 @@ body, html  {
 }
 
 .number {
-    position: relative;
+    position: absolute;
     height: 15vmin;
     width: 15vmin;
     font-weight: bold;
