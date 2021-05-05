@@ -57,14 +57,29 @@
     position: absolute;
 }
 
+/*
+I will set the place of the gap randomly.
+To do that:
+    - set a minimum and maximum position (16px, 16px)
+    - set the gap size (50 px)
+    - set the list of possible gap places (divide by 10px, result: 40)
+    - randomize
+    - calculate pipe length
+    - write js DOM manipulation
+ */
+
 .upper_pipe {
-    background-image: url("images/upper_pipe.png");
+    background: url("images/upper_pipe.png");
+    animation: slide 10s linear infinite;
     position: relative;
+    bottom: 66px;
 }
 
 .lower_pipe {
-    background-image: url("images/lower_pipe.png");
+    background: url("images/lower_pipe.png");
+    animation: slide 10s linear infinite;
     position: relative;
+    top: 66px;
 }
 
 @keyframes slide {
