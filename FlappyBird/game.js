@@ -140,9 +140,9 @@ function Compare(bird, obstacle)
 function Compare_these() {
     function getPositions( elem ) {
         var pos, width, height;
-        pos = $( elem ).position();
-        width = $( elem ).width() / 2;
-        height = $( elem ).height();
+        pos = elem.position();
+        width = elem.clientWidth() / 2;
+        height = elem.clientHeight();
         return [ [ pos.left, pos.left + width ], [ pos.top, pos.top + height ] ];
     }
 
