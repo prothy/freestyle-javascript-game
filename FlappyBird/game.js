@@ -97,27 +97,56 @@ function CheckCollision()
         if (Compare(bird_pos, rect))
         {
             // TODO: write function GameOver()
+            console.log("Érzékelte az ütközést");
             GameOver();
         }
     }
 }
 
+/*
 function Compare(bird, obstacle)
 {
-    /*
+    /!*
     Azért használok 2 betűs változókat mert különben nem férne ki az egész feltétel a képernyőre.
     A változónevek az objektum (bird/obstacle) első betűjéből
     és a kulcs (top/bottom/right/left) első betűjéből tevődnek össze.
     Ebből az oldalból indultam ki:
     https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-     */
+     *!/
 
     var bt = bird["top"], bb = bird['bottom'], bl = bird['left'], br = bird['right'];
     var ot = obstacle['top'], ob = obstacle['bottom'], ol = obstacle['left'], or = obstacle['right'];
+    var result = false;
 
-    if ((bt <= ot) && (bt >= ob) && (bl >= ol) && (bl <= or)) return true;
-    else if ((bb <= ot) && (bb >= ob) && (br <= ol) && (bl >= or)) return true;
-    else if ((bt <= ot) && (bt >= ob) && (br <= ol) && (bl >= or)) return true;
-    else if ((bb <= ot) && (bb >= ob) && (bl >= ol) && (bl <= or)) return true;
-    else return false;
-}
+    if ((bt <= ot) && (bt >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
+    else if ((bb <= ot) && (bb >= ob) && (br <= ol) && (bl >= or)) {result = true;}
+    else if ((bt <= ot) && (bt >= ob) && (br <= ol) && (bl >= or)) {result = true;}
+    else if ((bb <= ot) && (bb >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
+
+    console.log(`The value of result: ${result}`);
+    return result;
+}*/
+
+// EZ az új programrész
+var Compare = (function () {
+    function getPositions( elem ) {
+        var pos, width, height;
+        pos = $( elem ).position();
+        width = $( elem ).width() / 2;
+        height = $( elem ).height();
+        return [ [ pos.left, pos.left + width ], [ pos.top, pos.top + height ] ];
+    }
+
+    function comparePositions( p1, p2 ) {
+        var r1, r2;
+        r1 = p1[0] < p2[0] ? p1 : p2;
+        r2 = p1[0] < p2[0] ? p2 : p1;
+        return r1[1] > r2[0] || r1[0] === r2[0];
+    }
+
+    return function ( a, b ) {
+        var pos1 = getPositions( a ),
+            pos2 = getPositions( b );
+        return comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] );
+    };
+})();
