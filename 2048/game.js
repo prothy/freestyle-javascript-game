@@ -1,6 +1,4 @@
-'use strict';
-
-import grid from './modules/grid.js';
+import grid from './grid.js';
 
 grid.init();
 
