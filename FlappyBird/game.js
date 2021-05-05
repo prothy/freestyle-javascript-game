@@ -102,41 +102,47 @@ function CheckCollision()
 
     for (let obs of obstacles)
     {
-        let comparison = Compare_these(bird_pos, obs);
-        console.log("97th line"); // idáig eljut a program
-        if (comparison === true)
+        if (Compare(bird_pos, obs) === true)
         {
             // TODO: write function GameOver()
+            console.log("Van egy talalat.");
             GameOver();
         }
     }
 }
 
-/*
+
 function Compare(bird, obstacle)
 {
-    /!*
+
+    /*
     Azért használok 2 betűs változókat mert különben nem férne ki az egész feltétel a képernyőre.
     A változónevek az objektum (bird/obstacle) első betűjéből
     és a kulcs (top/bottom/right/left) első betűjéből tevődnek össze.
     Ebből az oldalból indultam ki:
     https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-     *!/
+     */
 
-    var bt = bird["top"], bb = bird['bottom'], bl = bird['left'], br = bird['right'];
-    var ot = obstacle['top'], ob = obstacle['bottom'], ol = obstacle['left'], or = obstacle['right'];
-    var result = false;
+    const bt = bird.getBoundingClientRect().top;
+    const bb = bird.getBoundingClientRect().bottom;
+    const bl = bird.getBoundingClientRect().left;
+    const br = bird.getBoundingClientRect().right;
+
+    const ot = obstacle.getBoundingClientRect().top;
+    const ob = obstacle.getBoundingClientRect().bottom;
+    const ol = obstacle.getBoundingClientRect().left;
+    const or = obstacle.getBoundingClientRect().right;
+
+    let result = false;
 
     if ((bt <= ot) && (bt >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
     else if ((bb <= ot) && (bb >= ob) && (br <= ol) && (bl >= or)) {result = true;}
     else if ((bt <= ot) && (bt >= ob) && (br <= ol) && (bl >= or)) {result = true;}
     else if ((bb <= ot) && (bb >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
 
-    console.log(`The value of result: ${result}`);
     return result;
-}*/
-
-// EZ az új programrész
+}
+/*
 function Compare_these() {
     function getPositions( elem ) {
         var pos, width, height;
@@ -170,3 +176,4 @@ function Compare_these() {
         //return (comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] ));
     };
 }
+*/
