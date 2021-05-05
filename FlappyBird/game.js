@@ -89,15 +89,15 @@ function GameOver()
 function CheckCollision()
 {
     const obstacles = document.querySelectorAll('.obstacle');
-    const bird_pos = document.querySelector('.bird').getBoundingClientRect();
+    const bird_pos = document.querySelector('.bird');
 
     for (let obs of obstacles)
     {
-        var rect = obs.getBoundingClientRect();
-        if (Compare(bird_pos, rect))
+        let comparison = Compare_these(bird_pos, obs);
+        console.log("97th line"); // idáig eljut a program
+        if (comparison === true)
         {
             // TODO: write function GameOver()
-            console.log("Érzékelte az ütközést");
             GameOver();
         }
     }
@@ -128,7 +128,7 @@ function Compare(bird, obstacle)
 }*/
 
 // EZ az új programrész
-var Compare = (function () {
+function Compare_these() {
     function getPositions( elem ) {
         var pos, width, height;
         pos = $( elem ).position();
@@ -147,6 +147,17 @@ var Compare = (function () {
     return function ( a, b ) {
         var pos1 = getPositions( a ),
             pos2 = getPositions( b );
-        return comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] );
+        console.log("Start to compare"); // idáig nem jut el a program.
+        if (comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] ))
+        {
+            console.log("The return value of Compare is true.");
+            return true;
+        }
+        else
+        {
+            console.log("The return value of Compare is false.");
+            return false;
+        }
+        //return (comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] ));
     };
-})();
+}
