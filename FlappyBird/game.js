@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let gameStarted = false;
 
-    let birdLeft = 220;
     let birdBottom = 100;
     // let gravity = 2;
 
@@ -57,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let timeDiff = (curTime - initTime)/1000
         if (birdBottom > 0 && gameStarted) birdBottom += (velocity * timeDiff) + (gravity * timeDiff**2)/2
         bird.style.bottom = birdBottom + 'px';
-        bird.style.left = birdLeft + 'px';
         PlacePipes() // Bori
         // if (birdBottom === 0) break;
         document.addEventListener('keydown', jump);
@@ -65,11 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerId = setInterval(startGame, interval);
 
 
-    function jump() {
-        if (!gameStarted) gameStarted = true;
-        initTime = Date.now();
-        velocity = 40;
-        bird.style.bottom = birdBottom + 'px';
-        // timeDiff = 
+    function jump(e) {
+        if (e.key == ' ') {
+            if (!gameStarted) gameStarted = true;
+
+            initTime = Date.now();
+            velocity = 40;
+            bird.style.bottom = birdBottom + 'px';
+        }
     }
 })

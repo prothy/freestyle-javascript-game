@@ -35,6 +35,14 @@
   animation: slide 10s linear infinite;
 }
 
+.start-game {
+  --width: 60px;
+  position: absolute;
+
+  top: 50%;
+  left: calc(50% - var(--width));
+}
+
 /*
 .sky {
     width: 500px;
@@ -51,10 +59,13 @@
 } */
 
 .bird {
-    background-image: url("images/UFO_spaceship.png");
-    width: 60px;
-    height: 33px;
+    --bird-width: 60px;
     position: absolute;
+    left: calc(50% - var(--bird-width));
+    width: var(--bird-width);
+    height: 33px;
+
+    background-image: url("images/UFO_spaceship.png");
 }
 
 /*
