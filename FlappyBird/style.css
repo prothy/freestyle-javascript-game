@@ -22,6 +22,18 @@
     animation: slide 10s linear infinite;
 }
 
+.score-container {
+    top: 0px;
+    left: 280px;
+    right: 454px;
+    background-image: url("images/score_background.png");
+}
+
+.score {
+    right: 25px;
+    /* mask-image: url("images/numbers/0.png"); */
+}
+
 .game-container {
     width: 454px;
     height: 482px;
@@ -31,14 +43,13 @@
 }
 
 .obstacle {
-  --obstacle-size: 50px;
   position: absolute;
   left: 100%;
 
-  width: var(--obstacle-size);
-  height: var(--obstacle-size);
+  width: 112px;
+  height: 100px;
 
-  background: green;
+  background: url("images/obstacle.png");
 }
 
 .start-game {
@@ -50,21 +61,6 @@
   left: calc(50% - (var(--width)/2));
 }
 
-/*
-.sky {
-    width: 500px;
-    height: 580px;
-    position: absolute;
-}
-
-.ground {
-    background-color: brown;
-    width: 500px;
-    height: 150px;
-    position: absolute;
-    top: 580px;
-} */
-
 .bird {
     --bird-width: 60px;
     position: absolute;
@@ -75,30 +71,6 @@
     background-image: url("images/UFO_spaceship.png");
 }
 
-/*
-I will set the place of the gap randomly.
-To do that:
-    - set a minimum and maximum position (16px, 16px)
-    - set the gap size (50 px)
-    - set the list of possible gap places (divide by 10px, result: 40)
-    - randomize
-    - calculate pipe length
-    - write js DOM manipulation
- */
-/* 
-.upper_pipe {
-    background: url("images/upper_pipe.png");
-    animation: slide 10s linear infinite;
-    position: relative;
-    bottom: 66px;
-}
-
-.lower_pipe {
-    background: url("images/lower_pipe.png");
-    animation: slide 10s linear infinite;
-    position: relative;
-    top: 66px;
-} */
 
 @keyframes slide {
   0%{

@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function startGame() {
     const bird = document.querySelector('.bird');
     const gameDisplay = document.querySelector('.game-container');
-    const ground = document.querySelector('.ground');
     const wrapper = document.querySelector('.wrapper');
 
 
@@ -29,7 +28,7 @@ function startGame() {
 
     function gameLoop() {
         let curTime = Date.now();
-        let timeDiff = (curTime - initTime)/1000
+        let timeDiff = (curTime - initTime)/1000;
 
         if (birdBottom > 0 && gameStarted) birdBottom += (velocity * timeDiff) + (gravity * timeDiff**2)/2
         bird.style.bottom = birdBottom + 'px';
@@ -38,8 +37,10 @@ function startGame() {
         document.addEventListener('keydown', jump);
 
         if (gameStarted) {
-            console.log(startTime-curTime)
-            if ((startTime - curTime) % 1000 === 0) {
+           
+            UpdateScore();
+
+            if ((startTime - curTime) % 2000 === 0) {
                 wrapper.appendChild(new Obstacle());
             }
             checkCollision();
@@ -71,7 +72,6 @@ function startGame() {
         }
     }
 
-
     function compare(bird, obstacle)
     {
         const bt = bird.getBoundingClientRect().top;
@@ -87,6 +87,15 @@ function startGame() {
         return (!(bb < ot || br < ol || bl > or || bt > ob ));
     }
 
+    function UpdateScore()
+    {
+
+        let current_score = document.getElementById("score").innerText;
+        let score = parseInt(current_score) + 0.05;
+        let new_score = score.toFixed(0).toString();
+        //let image_url = 'images/numbers/'+new_score+'.png';
+        document.getElementById("score").innerText = new_score;
+    }
 
     function jump(e) {
         if (e.key == ' ') {
