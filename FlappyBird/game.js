@@ -18,6 +18,7 @@ function startGame() {
     let initTime = Date.now()
     const interval = 20    // milliseconds per update
     const startTime = Date.now();
+    let rotation = 0;
     
 
     let gameStarted = false;
@@ -52,7 +53,15 @@ function startGame() {
             }
             initTime = Date.now();
             velocity = 40;
+            rotation = -45;
+
             bird.style.bottom = birdBottom + 'px';
+            // bird.style.transform = `rotate(${rotation}deg)`
+
+
+            bird.animate({
+                transform: [`rotate(${rotation}deg)`, 'rotate(90deg)']
+            }, 1000)
         }
     }
 
@@ -74,7 +83,7 @@ function startGame() {
             obstacle.style.left = `${wrapper.clientWidth}px`
 
             obstacle.animate({
-                transform: ['translateX(0px)', [`translateX(-500px)`]]
+                transform: ['translateX(0px)', `translateX(-500px)`]
             }, 2000)
             
         }
