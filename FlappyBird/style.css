@@ -26,6 +26,8 @@
     width: 454px;
     height: 482px;
     position: absolute;
+
+    overflow: hidden;
 }
 
 .obstacle {
@@ -37,7 +39,6 @@
   height: var(--obstacle-size);
 
   background: green;
-  animation: slide 10s linear infinite;
 }
 
 .start-game {
