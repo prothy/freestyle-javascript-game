@@ -22,6 +22,19 @@
     position: absolute;
 }
 
+.obstacle {
+  --height: 200px;
+  position: relative;
+  left: 120%;
+  top: var(--height);
+
+
+  width: 50px;
+  height: var(--height);
+  background: green;
+  animation: slide 10s linear infinite;
+}
+
 /*
 .sky {
     width: 500px;
