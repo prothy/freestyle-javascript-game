@@ -31,7 +31,34 @@ const number = {
         grid.gridElement.append(numberElement);
 
         return true;
+    },
+    moveTo: function () {
+        const number = fromCell.number;
+
+        if (toCell.number === null) {
+            number.style.top = `${toCell.top}px`;
+            number.style.left = `${toCell.left}px`;
+
+            toCell.number = number;
+            fromCell.number = null;
+
+        } else if (number.dataset.value === toCell.number.dataset.value) {
+            number.style.top = `${toCell.top}px`;
+            number.style.left = `${toCell.left}px`;
+            number.style.opacity = '0';
+
+            setTimeout(() => {
+                grid.gridElement.removeChild(number);
+            }, 500);
+
+            const newNumberValue = toCell.number.dataset.value * 2;
+            toCell.number.dataset.value = newNumberValue;
+            toCell.number.innerText = newNumberValue;
+
+            fromCell.number = null;
+        }
     }
+
 }
 
 export default number;
