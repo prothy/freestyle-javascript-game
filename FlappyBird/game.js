@@ -12,12 +12,14 @@ function startGame() {
 
 
     /* PHSYICS CONSTANTS */
-    const gravity = -150   // gravitational acceleration
+    const gravity = -250   // gravitational acceleration
     let velocity = 0;      // vertical velocity
     let initTime = Date.now()
     const interval = 20    // milliseconds per update
     const startTime = Date.now();
-    let rotation = 0;
+
+    let rotationTimer, currentRotation;
+    let initRotation = 0;
     
 
     let gameStarted = false;
@@ -38,11 +40,12 @@ function startGame() {
 
         if (gameStarted) {
            
-            UpdateScore();
+            updateScore();
 
             if ((startTime - curTime) % 2000 === 0) {
                 wrapper.appendChild(new Obstacle());
             }
+            console.log(currentRotation);
             checkCollision();
             if (birdBottom <= 0) gameOver()
         }
@@ -74,20 +77,22 @@ function startGame() {
 
     function compare(bird, obstacle)
     {
-        const bt = bird.getBoundingClientRect().top;
+        const tolerance = 80;
+
+        const bt = bird.getBoundingClientRect().top ;
         const bb = bird.getBoundingClientRect().bottom;
         const bl = bird.getBoundingClientRect().left;
         const br = bird.getBoundingClientRect().right;
 
-        const ot = obstacle.getBoundingClientRect().top;
-        const ob = obstacle.getBoundingClientRect().bottom;
-        const ol = obstacle.getBoundingClientRect().left;
-        const or = obstacle.getBoundingClientRect().right;
+        const ot = obstacle.getBoundingClientRect().top - tolerance;
+        const ob = obstacle.getBoundingClientRect().bottom + tolerance;
+        const ol = obstacle.getBoundingClientRect().left + tolerance;
+        const or = obstacle.getBoundingClientRect().right - tolerance;
 
         return (!(bb < ot || br < ol || bl > or || bt > ob ));
     }
 
-    function UpdateScore()
+    function updateScore()
     {
 
         let current_score = document.getElementById("score").innerText;
@@ -103,17 +108,26 @@ function startGame() {
                 gameStarted = true;
                 document.querySelector('.start-game').style.display = 'none';
             }
+            velocity = 55;
+            initRotation = -45;
+
+            rotationTimer = initTime;
             initTime = Date.now();
-            velocity = 40;
-            rotation = -45;
+
+            currentRotation = ((115/1000)*(Math.floor(initTime - rotationTimer)));
 
             bird.style.bottom = birdBottom + 'px';
-            // bird.style.transform = `rotate(${rotation}deg)`
 
+            // bird.animate({
+            //     transform: [`rotate(${currentRotation}deg)`, `rotate(${initRotation}deg)`]
+            // }, 100)
 
             bird.animate({
-                transform: [`rotate(${rotation}deg)`, 'rotate(90deg)']
-            }, 1000)
+                transform: [`rotate(${currentRotation}deg)`, `rotate(${initRotation}deg)`, 'rotate(90deg)']
+            }, {
+                duration: 1000,
+                easing: 'cubic-bezier(0,.8,.15,.6)'
+            })
         }
     }
 
@@ -135,10 +149,10 @@ function startGame() {
             obstacle.style.left = `${wrapper.clientWidth}px`
 
             obstacle.animate({
-                transform: ['translateX(0px)', `translateX(-500px)`]
+                transform: ['translateX(0px)', `translateX(-600px)`]
             }, 2000)
             
-            // obstacle.remove();
+            obstacle.remove();
         }
     }
 }
