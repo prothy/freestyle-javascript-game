@@ -35,7 +35,9 @@ function startGame() {
         document.addEventListener('keydown', jump);
 
         if (gameStarted) {
-            if ((startTime - curTime) % 2000 === 0) placeObstacles();
+            if ((startTime - curTime) % 2000 === 0) {
+                wrapper.appendChild(new Obstacle());
+            }
         }
     }
     let timerId = setInterval(gameLoop, interval);
@@ -53,45 +55,55 @@ function startGame() {
         }
     }
 
-    function placeObstacles() {
-        const obstacle = document.createElement('div');
-        const bg = document.querySelector('.sliding-background');
+    class Obstacle {
+        constructor() {
+            const obstacle = document.createElement('div');
 
-        obstacle.classList.add('obstacle');
+            this.setProperties(obstacle);
 
-        let randomY = Math.floor(Math.random() * wrapper.clientHeight);
+            return obstacle;
+        }
 
-        obstacle.style.top = `${randomY}px`;
-        obstacle.style.left = `${wrapper.clientWidth}px`
-        
-        wrapper.appendChild(obstacle);
+        setProperties(obstacle) {
+            let randomY = Math.floor(Math.random() * wrapper.clientHeight);
+
+            obstacle.classList.add('obstacle');
+
+            obstacle.style.top = `${randomY}px`;
+            obstacle.style.left = `${wrapper.clientWidth}px`
+
+            obstacle.animate({
+                transform: ['translateX(0px)', [`translateX(-500px)`]]
+            }, 2000)
+            
+        }
     }
 }
 
-function makeNew(counter)
-{
-    var random = Math.random() % 400;
-    document.body.appendChild( document.createElement('div') );
-    counter++;
-    for (cl of ["lower", "upper"])
-    {
-        var new_pipe = document.createElement('div');
-        new_pipe.setAttribute("class", '.'+cl+'_pipe');
-        new_pipe.setAttribute("id", `${cl}_pipe_${counter}`);
-        document.body.appendChild(new_pipe);
-    }
+// function makeNew(counter)
+// {
+//     var random = Math.random() % 400;
+//     document.body.appendChild( document.createElement('div') );
+//     counter++;
+//     for (cl of ["lower", "upper"])
+//     {
+//         var new_pipe = document.createElement('div');
+//         new_pipe.setAttribute("class", '.'+cl+'_pipe');
+//         new_pipe.setAttribute("id", `${cl}_pipe_${counter}`);
+//         document.body.appendChild(new_pipe);
+//     }
 
-    var upper = document.querySelector('#upper_pipe_' + counter.toString());
-    var lower = document.querySelector('#lower_pipe_' + counter.toString());
+//     var upper = document.querySelector('#upper_pipe_' + counter.toString());
+//     var lower = document.querySelector('#lower_pipe_' + counter.toString());
 
-    upper.bottom = random;
-    lower.top = random;
-}
+//     upper.bottom = random;
+//     lower.top = random;
+// }
 
-function PlacePipes()
-{
-    var timer = 1000;
-    var counter = 0;
-    setInterval(timer = function(timer){timer -= 200; return timer;}, 10000);
-    setTimeout(function(){setInterval(makeNew(counter), timer)}, 3000);
-}
+// function PlacePipes()
+// {
+//     var timer = 1000;
+//     var counter = 0;
+//     setInterval(timer = function(timer){timer -= 200; return timer;}, 10000);
+//     setTimeout(function(){setInterval(makeNew(counter), timer)}, 3000);
+// }
