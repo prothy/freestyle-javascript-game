@@ -117,11 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
         bird.style.bottom = birdBottom + 'px';
         bird.style.left = birdLeft + 'px';
         PlacePipes(); // Bori
+        CheckCollision();
         // if (birdBottom === 0) break;
         document.addEventListener('keydown', jump);
     }
     let timerId = setInterval(startGame, interval);
-    let checker = setInterval(CheckCollision, interval);
 
 
     function GameOver()
