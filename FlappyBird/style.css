@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .full-screen {
     width: 100%;
     height: auto;
@@ -23,24 +29,24 @@
 }
 
 .obstacle {
-  --height: 200px;
-  position: relative;
-  left: 120%;
-  top: var(--height);
+  --obstacle-size: 50px;
+  position: absolute;
+  left: 100%;
 
+  width: var(--obstacle-size);
+  height: var(--obstacle-size);
 
-  width: 50px;
-  height: var(--height);
   background: green;
   animation: slide 10s linear infinite;
 }
 
 .start-game {
-  --width: 60px;
+  --width: 122px;
+
   position: absolute;
 
   top: 50%;
-  left: calc(50% - var(--width));
+  left: calc(50% - (var(--width)/2));
 }
 
 /*
@@ -61,7 +67,7 @@
 .bird {
     --bird-width: 60px;
     position: absolute;
-    left: calc(50% - var(--bird-width));
+    left: calc(50% - (var(--bird-width)/2));
     width: var(--bird-width);
     height: 33px;
 
@@ -78,7 +84,7 @@ To do that:
     - calculate pipe length
     - write js DOM manipulation
  */
-
+/* 
 .upper_pipe {
     background: url("images/upper_pipe.png");
     animation: slide 10s linear infinite;
@@ -91,7 +97,7 @@ To do that:
     animation: slide 10s linear infinite;
     position: relative;
     top: 66px;
-}
+} */
 
 @keyframes slide {
   0%{

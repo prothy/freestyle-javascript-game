@@ -9,6 +9,7 @@ function startGame() {
     const bird = document.querySelector('.bird');
     const gameDisplay = document.querySelector('.game-container');
     const ground = document.querySelector('.ground');
+    const wrapper = document.querySelector('.wrapper');
 
 
     /* PHSYICS CONSTANTS */
@@ -16,8 +17,9 @@ function startGame() {
     let velocity = 0;      // vertical velocity
     let initTime = Date.now()
     const interval = 20    // milliseconds per update
+    const startTime = Date.now();
     
-    
+
     let gameStarted = false;
 
     let birdBottom = 100;
@@ -25,23 +27,44 @@ function startGame() {
     function gameLoop() {
         let curTime = Date.now();
         let timeDiff = (curTime - initTime)/1000
+
         if (birdBottom > 0 && gameStarted) birdBottom += (velocity * timeDiff) + (gravity * timeDiff**2)/2
         bird.style.bottom = birdBottom + 'px';
-        PlacePipes() // Bori
+        
         // if (birdBottom === 0) break;
         document.addEventListener('keydown', jump);
+
+        if (gameStarted) {
+            if ((startTime - curTime) % 2000 === 0) placeObstacles();
+        }
     }
     let timerId = setInterval(gameLoop, interval);
 
 
     function jump(e) {
         if (e.key == ' ') {
-            if (!gameStarted) gameStarted = true;
-
+            if (!gameStarted) {
+                gameStarted = true;
+                document.querySelector('.start-game').style.display = 'none';
+            }
             initTime = Date.now();
             velocity = 40;
             bird.style.bottom = birdBottom + 'px';
         }
+    }
+
+    function placeObstacles() {
+        const obstacle = document.createElement('div');
+        const bg = document.querySelector('.sliding-background');
+
+        obstacle.classList.add('obstacle');
+
+        let randomY = Math.floor(Math.random() * wrapper.clientHeight);
+
+        obstacle.style.top = `${randomY}px`;
+        obstacle.style.left = `${wrapper.clientWidth}px`
+        
+        wrapper.appendChild(obstacle);
     }
 }
 
