@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameDisplay = document.querySelector('.game-container');
     const ground = document.querySelector('.ground');
 
-    const gravity = -10   // gravitational acceleration
+    const gravity = -150   // gravitational acceleration
+    let velocity = 0;
     let initTime = Date.now()
     const interval = 20   // milliseconds per update
 
@@ -25,20 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function startGame() {
         let curTime = Date.now();
         let timeDiff = (curTime - initTime)/1000
-        if (birdBottom > 0) birdBottom += (gravity * timeDiff**2)/2
-        // console.log((gravity * ((time-Date.now())/100)**2))*10
-        // time = Date.now();
+        if (birdBottom > 0) birdBottom += (velocity * timeDiff) + (gravity * timeDiff**2)/2
         bird.style.bottom = birdBottom + 'px';
         bird.style.left = birdLeft + 'px';
+        // if (birdBottom === 0) break;
+        document.addEventListener('keydown', jump);
     }
     let timerId = setInterval(startGame, interval);
 
 
     function jump() {
         initTime = Date.now();
-        birdBottom += 50
+        velocity = 40;
         bird.style.bottom = birdBottom + 'px';
         // timeDiff = 
     }
-    document.addEventListener('keyup', jump);
 })
