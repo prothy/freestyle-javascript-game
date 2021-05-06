@@ -63,11 +63,12 @@ function startGame() {
     function gameOver()
     {
         gameStarted = false;
-        // alert("Game Over!\nYou lost!");
+
         birdBottom = birdInitPos;
-        // bird.animate = 'none';
         currentRotation = 0;
         initRotation = 0;
+
+        document.querySelector('.start-game').innerHTML = 'Game over.<br>Press space to try again.'
         document.querySelector('.start-game').style.display = 'initial';
     }
 
