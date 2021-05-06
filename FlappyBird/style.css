@@ -63,7 +63,7 @@
 .obstacle {
   position: absolute;
 
-  width: 112px;
+  width: 100px;
   height: 100px;
 
   background: url("images/obstacle.png");
