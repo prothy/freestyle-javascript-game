@@ -2,33 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Game 2048</title>
+    <title>[2048]</title>
     <link rel="stylesheet" href="style.css">
-    <!--  Had to include type="module" in the script in order to use the grid.module  -->
-    <script src="game.js" charset="UTF-8"></script>
+    <script src="2048.js" charset="UTF-8"></script>
+    <script src="https://kit.fontawesome.com/450dc51bb0.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<div class="wrapper">
-    <div class="grid">
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
+<div class="container">
+    <div class="info">
+        <h1>2048</h1>
+        <div class="score-container">
+            <div class="score-title">Current Score:
+                <span id="score">0</span>
+            </div>
+        </div>
+        <div class="score-container">
+            <div class="score-title"> Highest Score:
+                <span id="high-score">0</span>
+            </div>
+        </div>
     </div>
+    <span id="result">Win the game by getting the number 2048!</span>
+    <div class="grid"></div>
 </div>
 
 </body>
