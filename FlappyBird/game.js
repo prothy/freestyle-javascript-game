@@ -71,15 +71,19 @@ function startGame() {
         let score_int = parseInt(score_str.substr(12));
         let highscore = document.getElementById('highscore').innerHTML;
         let highscore_int = parseInt(highscore.substr(15));
-
-        let message = score_str + '<br>' + "Game Over!" + '<br>' + "Press space to try again";
+        let message = "Press space to try again";
 
         if (score_int > highscore_int)
         {
             highscore = "Highest score: " + score_int.toString();
             document.getElementById("highscore").innerHTML = highscore;
-            alert("New Record: " + score_int.toString());
+            message = "New Record: " + score_int.toString() + "<br>" + "Press space to try again";
         }
+        else
+        {
+            message =  score_str + '<br>' + "Press space to try again";
+        }
+
         document.querySelector('.start-game').style.display = 'initial';
         document.getElementById('start').innerHTML = message;
         document.getElementById('score').innerHTML = 'Your score: 0';
