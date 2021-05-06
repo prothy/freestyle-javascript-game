@@ -54,7 +54,7 @@ function startGame() {
             }
             console.log(currentRotation);
             checkCollision();
-            if (birdBottom <= 0) gameOver()
+            if (birdBottom <= 0) gameOver();
         }
     }
     let timerId = setInterval(gameLoop, interval);
@@ -75,7 +75,6 @@ function startGame() {
         for (let obs of obstacles)
         {
             if (compare(bird_pos, obs)) {
-                // TODO: write function GameOver()
                 gameOver();
             }
         }
@@ -101,11 +100,11 @@ function startGame() {
     function updateScore()
     {
 
-        let current_score = document.getElementById("score").innerText;
-        let score = parseInt(current_score) + 0.05;
-        let new_score = score.toFixed(0).toString();
-        //let image_url = 'images/numbers/'+new_score+'.png';
-        document.getElementById("score").innerText = new_score;
+        let current_score = document.getElementById("score").innerHTML.substr(12);
+    let score = parseInt(current_score) + 1;
+    let new_score = score.toFixed(0).toString();
+    //let image_url = 'images/numbers/'+new_score+'.png';
+    document.getElementById("score").innerHTML = "Your score: " + new_score;
     }
 
     function jump(e) {
@@ -161,58 +160,6 @@ function startGame() {
             obstacle.remove();
         }
     }
-}
-
-function GameOver()
-{
-    alert("Game Over!");
-}
-
-function CheckCollision()
-{
-    const obstacles = document.querySelectorAll('.obstacle');
-    const bird_pos = document.querySelector('.bird');
-
-    for (let obs of obstacles)
-    {
-        if (Compare(bird_pos, obs) === true)
-        {
-            // TODO: write function GameOver()
-            console.log("Van egy talalat.");
-            GameOver();
-        }
-    }
-}
-
-function UpdateScore()
-{
-    let current_score = document.getElementById("score").innerHTML.substr(12);
-    let score = parseInt(current_score) + 1;
-    let new_score = score.toFixed(0).toString();
-    //let image_url = 'images/numbers/'+new_score+'.png';
-    document.getElementById("score").innerHTML = "Your score: " + new_score;
-}
-
-function Compare(bird, obstacle)
-{
-    const bt = bird.getBoundingClientRect().top;
-    const bb = bird.getBoundingClientRect().bottom;
-    const bl = bird.getBoundingClientRect().left;
-    const br = bird.getBoundingClientRect().right;
-
-    const ot = obstacle.getBoundingClientRect().top;
-    const ob = obstacle.getBoundingClientRect().bottom;
-    const ol = obstacle.getBoundingClientRect().left;
-    const or = obstacle.getBoundingClientRect().right;
-
-    let result = false;
-
-    if ((bt <= ot) && (bt >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
-    else if ((bb <= ot) && (bb >= ob) && (br <= ol) && (bl >= or)) {result = true;}
-    else if ((bt <= ot) && (bt >= ob) && (br <= ol) && (bl >= or)) {result = true;}
-    else if ((bb <= ot) && (bb >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
-
-    return result;
 }
 
 /*
