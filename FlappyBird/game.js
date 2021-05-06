@@ -24,6 +24,8 @@ function startGame() {
 
     let birdBottom = 100;
 
+    let score_counter = 0;
+
     function gameLoop() {
         let curTime = Date.now();
         let timeDiff = (curTime - initTime)/1000;
@@ -36,7 +38,12 @@ function startGame() {
 
         if (gameStarted) {
             CheckCollision();
-            UpdateScore();
+            score_counter += 1;
+            if (score_counter === 50)
+            {
+                UpdateScore();
+                score_counter = 0;
+            }
 
             if ((startTime - curTime) % 2000 === 0) {
                 wrapper.appendChild(new Obstacle());
@@ -114,12 +121,11 @@ function CheckCollision()
 
 function UpdateScore()
 {
-
-    let current_score = document.getElementById("score").innerText;
-    let score = parseInt(current_score) + 0.05;
+    let current_score = document.getElementById("score").innerHTML.substr(12);
+    let score = parseInt(current_score) + 1;
     let new_score = score.toFixed(0).toString();
     //let image_url = 'images/numbers/'+new_score+'.png';
-    document.getElementById("score").innerText = new_score;
+    document.getElementById("score").innerHTML = "Your score: " + new_score;
 }
 
 function Compare(bird, obstacle)
