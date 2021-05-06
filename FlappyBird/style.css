@@ -1,3 +1,7 @@
+:root {
+  --game-width: 500px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,8 +12,8 @@
   position: relative;
   overflow: hidden;
   background: rgb(156, 1, 86);
-  width: 500px;
-  height: 500px;
+  width: var(--game-width);
+  height: var(--game-width);
 }
 
 .game-title {
@@ -39,6 +43,7 @@
 .game-container {
     margin: auto;
     overflow: hidden;
+    width: var(--game-width)
 }
 
 .obstacle {
