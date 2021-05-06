@@ -37,8 +37,8 @@ function startGame() {
 
         if (birdBottom > 0 && gameStarted) birdBottom += (velocity * timeDiff) + (gravity * timeDiff**2)/2
         bird.style.bottom = birdBottom + 'px';
-        
-        // if (birdBottom === 0) break;
+
+
         document.addEventListener('keydown', jump);
 
         if (gameStarted) {
@@ -63,9 +63,7 @@ function startGame() {
     function gameOver()
     {
         gameStarted = false;
-        // alert("Game Over!\nYou lost!");
         birdBottom = birdInitPos;
-        // bird.animate = 'none';
         currentRotation = 0;
         initRotation = 0;
         document.querySelector('.start-game').style.display = 'initial';
@@ -110,7 +108,6 @@ function startGame() {
         let current_score = document.getElementById("score").innerHTML.substr(12);
     let score = parseInt(current_score) + 1;
     let new_score = score.toFixed(0).toString();
-    //let image_url = 'images/numbers/'+new_score+'.png';
     document.getElementById("score").innerHTML = "Your score: " + new_score;
     }
 
@@ -129,10 +126,6 @@ function startGame() {
             currentRotation = ((115/1000)*(Math.floor(initTime - rotationTimer)));
 
             bird.style.bottom = birdBottom + 'px';
-
-            // bird.animate({
-            //     transform: [`rotate(${currentRotation}deg)`, `rotate(${initRotation}deg)`]
-            // }, 100)
 
             bird.animate({
                 transform: [`rotate(${currentRotation}deg)`, `rotate(${initRotation}deg)`, 'rotate(90deg)']
@@ -201,39 +194,3 @@ function startGame() {
         }
     }
 }
-
-/*
-function Compare_these() {
-    function getPositions( elem ) {
-        var pos, width, height;
-        pos = elem.position();
-        width = elem.clientWidth() / 2;
-        height = elem.clientHeight();
-        return [ [ pos.left, pos.left + width ], [ pos.top, pos.top + height ] ];
-    }
-
-    function comparePositions( p1, p2 ) {
-        var r1, r2;
-        r1 = p1[0] < p2[0] ? p1 : p2;
-        r2 = p1[0] < p2[0] ? p2 : p1;
-        return r1[1] > r2[0] || r1[0] === r2[0];
-    }
-
-    return function ( a, b ) {
-        var pos1 = getPositions( a ),
-            pos2 = getPositions( b );
-        console.log("Start to compare"); // idáig nem jut el a program.
-        if (comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] ))
-        {
-            console.log("The return value of Compare is true.");
-            return true;
-        }
-        else
-        {
-            console.log("The return value of Compare is false.");
-            return false;
-        }
-        //return (comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] ));
-    };
-}
-*/

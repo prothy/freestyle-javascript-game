@@ -1,10 +1,7 @@
 /*  TODO: delete commented program parts
-    TODO: fix problem: background sliding down when game starts --> fixed
     TODO: fix problem: stars and meteors disappear
-    TODO: fix problem: Game Over doesn't disappear, when game restarts --> fixed
-    TODO: set score to 0 when game restarts --> fixed
-    TODO: fix problem: "Press space" text is nearly invisible --> fixed
     TODO: lower the space between game-title and score box. They can appear in the same line. --> almost done
+    TODO: add high score
  */
 
 
@@ -21,7 +18,6 @@
 .wrapper {
   position: relative;
   overflow: hidden;
-/*<<<<<<< HEAD*/
 }
 
 .background {
@@ -36,7 +32,6 @@
 }
 
 .game-title {
-    right: 25px;
     text-shadow: 5px 5px 5px darkblue;
     font-weight: bold;
     font-size: 500%;
@@ -45,7 +40,6 @@
 }
 
 .score-container {
-    top: 0px;
     float: right;
     display: inline-block;
 }
