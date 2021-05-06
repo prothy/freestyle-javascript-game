@@ -32,7 +32,7 @@ const number = {
 
         return true;
     },
-    moveTo: function () {
+    moveTo: function (fromCell, toCell) {
         const number = fromCell.number;
 
         if (toCell.number === null) {

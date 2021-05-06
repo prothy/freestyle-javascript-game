@@ -79,7 +79,7 @@ const grid = {
                         if (foreCell.number === null) {
                             // If the cell is empty move to the next one and check it
                             moveToCell = foreCell;
-                        } else if (cell.number.dataset.value === foreCellIndex.number.dataset.value) {
+                        } else if (cell.number.dataset.value === foreCell.number.dataset.value) {
                             moveToCell = foreCell;
                             break;
                         } else {
