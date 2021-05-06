@@ -69,6 +69,7 @@ function startGame() {
         currentRotation = 0;
         initRotation = 0;
         document.querySelector('.start-game').style.display = 'initial';
+        document.querySelector('.game-over').style.visibility = 'visible';
     }
 
     function checkCollision()

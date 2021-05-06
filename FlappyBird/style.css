@@ -22,7 +22,7 @@
 .sliding-background {
     /*width: 1362px;
     height: 482px;*/
-    background: url("images/space_background.jpg") repeat-x;
+    /*background: url("images/space_background.jpg") repeat-x;*/
     animation: slide 10s linear infinite;/*
     background: rgb(156, 1, 86);*/
     /*width: 500px;
@@ -59,8 +59,9 @@
 
 .game-container {
     margin: auto;
+    width: 100%;
     overflow: hidden;
-    width: var(--game-width)
+    /*width: var(--game-width);*/
 }
 
 .obstacle {
@@ -79,6 +80,15 @@
 
   top: 50%;
   left: calc(50% - (var(--width)/2));
+}
+
+.game-over {
+    width: 533px;
+    height: 300px;
+    margin: auto;
+    visibility: hidden;
+    position: center;
+    background-image: url("images/game-over.jpg");
 }
 
 .bird {
