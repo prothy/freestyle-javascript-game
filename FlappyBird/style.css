@@ -1,3 +1,10 @@
+/*  TODO: delete commented program parts
+    TODO: fix problem: stars and meteors disappear
+    TODO: lower the space between game-title and score box. They can appear in the same line. --> almost done
+    TODO: add high score
+ */
+
+
 :root {
   --game-width: 500px;
 }
@@ -22,7 +29,6 @@
 }
 
 .game-title {
-    right: 25px;
     text-shadow: 5px 5px 5px darkblue;
     font-weight: bold;
     font-size: 500%;
@@ -30,22 +36,28 @@
     color: black;
 }
 
+.highscore-cintainer {
+    float: left;
+    display: inline-block;
+}
+
 .score-container {
-    top: 0px;
-    left: 280px;
-    right: 454px;
+    float: right;
+    display: inline-block;
 }
 
 .score {
     font-weight: bold;
-    font-size: large;
+    font-size: 40%;
     text-align: right;
-    color: darkred;
+    text-shadow: 2px 2px 2px purple;
+    color: white;
     line-height: 200%;
 }
 
 .game-container {
     margin: auto;
+    width: 100%;
     overflow: hidden;
     width: 100%;
 }
@@ -60,12 +72,13 @@
 }
 
 .start-game {
-  --width: 122px;
-
-  position: absolute;
-
-  top: 50%;
-  left: calc(50% - (var(--width)/2));
+    --width: 200px;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 100px);
+    font-size: 150%;
+    color: white;
+    text-align: center;
 }
 
 .bird {
