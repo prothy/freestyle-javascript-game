@@ -5,6 +5,7 @@
 }
 
 .wrapper {
+  position: relative;
   overflow: hidden;
 }
 
@@ -14,10 +15,13 @@
 }
 
 .sliding-background {
-    width: 1362px;
-    height: 482px;
+    /*width: 1362px;
+    height: 482px;*/
     background: url("images/space_background.jpg") repeat-x;
-    animation: slide 10s linear infinite;
+    animation: slide 10s linear infinite;/*
+    background: rgb(156, 1, 86);*/
+    width: 500px;
+    height: 500px;
 }
 
 .game-title {
@@ -45,14 +49,11 @@
 
 .game-container {
     margin: auto;
-    width: 454px;
-    height: auto;
     overflow: hidden;
 }
 
 .obstacle {
-  margin: auto;
-  left: 100%;
+  position: absolute;
 
   width: 112px;
   height: 100px;
@@ -75,7 +76,7 @@
     left: calc(45% - (var(--bird-width)/2));
     width: var(--bird-width);
     height: 33px;
-    overflow: hidden;
+    z-index: 2;
 
     background-image: url("images/UFO_spaceship.png");
 }
