@@ -1,6 +1,7 @@
 'use strict';
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
     startGame()
 })
@@ -9,6 +10,7 @@ function startGame() {
     const bird = document.querySelector('.bird');
     const gameDisplay = document.querySelector('.game-container');
     const wrapper = document.querySelector('.wrapper');
+
 
 
     /* PHSYICS CONSTANTS */
@@ -21,6 +23,7 @@ function startGame() {
     let rotationTimer, currentRotation;
     let initRotation = 0;
     
+    let obstacleSpawnInterval = 4000;
 
     let gameStarted = false;
 
@@ -36,11 +39,15 @@ function startGame() {
 
         if (birdBottom > 0 && gameStarted) birdBottom += (velocity * timeDiff) + (gravity * timeDiff**2)/2
         bird.style.bottom = birdBottom + 'px';
-        
-        // if (birdBottom === 0) break;
+
+
         document.addEventListener('keydown', jump);
 
         if (gameStarted) {
+            let timeCheck = startTime - curTime;
+            if ((timeCheck) % 2000 === 0) wrapper.appendChild(new Obstacle());
+            if ((timeCheck) % (Math.floor((Math.random() * 150))) === 0) wrapper.appendChild(new BackgroundObject());
+            if ((timeCheck) % obstacleSpawnInterval === 0 && obstacleSpawnInterval > 1400) obstacleSpawnInterval -= 400;
             checkCollision()
             score_counter += 1;
             if (score_counter === 50)
@@ -48,13 +55,8 @@ function startGame() {
                 updateScore();
                 score_counter = 0;
             }
-
-            if ((startTime - curTime) % 2000 === 0) {
-                wrapper.appendChild(new Obstacle());
-            }
             console.log(currentRotation);
-            checkCollision();
-            if (birdBottom <= 0) gameOver()
+            if (birdBottom <= 0) gameOver();
         }
     }
     let timerId = setInterval(gameLoop, interval);
@@ -63,8 +65,30 @@ function startGame() {
     function gameOver()
     {
         gameStarted = false;
-        alert("Game Over!\nYou lost!");
         birdBottom = birdInitPos;
+        currentRotation = 0;
+        initRotation = 0;
+
+        let score_str = document.getElementById('score').innerHTML;
+        let score_int = parseInt(score_str.substr(12));
+        let highscore = document.getElementById('highscore').innerHTML;
+        let highscore_int = parseInt(highscore.substr(15));
+        let message = "Press space to try again";
+
+        if (score_int > highscore_int)
+        {
+            highscore = "Highest score: " + score_int.toString();
+            document.getElementById("highscore").innerHTML = highscore;
+            message = "New Record: " + score_int.toString() + "<br>" + "Press space to try again";
+        }
+        else
+        {
+            message =  score_str + '<br>' + "Press space to try again";
+        }
+
+        document.querySelector('.start-game').style.display = 'initial';
+        document.getElementById('start').innerHTML = message;
+        document.getElementById('score').innerHTML = 'Your score: 0';
     }
 
     function checkCollision()
@@ -75,7 +99,6 @@ function startGame() {
         for (let obs of obstacles)
         {
             if (compare(bird_pos, obs)) {
-                // TODO: write function GameOver()
                 gameOver();
             }
         }
@@ -83,15 +106,15 @@ function startGame() {
 
     function compare(bird, obstacle)
     {
-        const tolerance = 80;
+        const tolerance = 10;
 
-        const bt = bird.getBoundingClientRect().top ;
+        const bt = bird.getBoundingClientRect().top;
         const bb = bird.getBoundingClientRect().bottom;
         const bl = bird.getBoundingClientRect().left;
         const br = bird.getBoundingClientRect().right;
 
-        const ot = obstacle.getBoundingClientRect().top - tolerance;
-        const ob = obstacle.getBoundingClientRect().bottom + tolerance;
+        const ot = obstacle.getBoundingClientRect().top + tolerance;
+        const ob = obstacle.getBoundingClientRect().bottom - tolerance;
         const ol = obstacle.getBoundingClientRect().left + tolerance;
         const or = obstacle.getBoundingClientRect().right - tolerance;
 
@@ -101,11 +124,10 @@ function startGame() {
     function updateScore()
     {
 
-        let current_score = document.getElementById("score").innerText;
-        let score = parseInt(current_score) + 0.05;
+        let current_score = document.getElementById("score").innerHTML.substr(12);
+        let score = parseInt(current_score) + 1;
         let new_score = score.toFixed(0).toString();
-        //let image_url = 'images/numbers/'+new_score+'.png';
-        document.getElementById("score").innerText = new_score;
+        document.getElementById("score").innerHTML = "Your score: " + new_score;
     }
 
     function jump(e) {
@@ -123,10 +145,6 @@ function startGame() {
             currentRotation = ((115/1000)*(Math.floor(initTime - rotationTimer)));
 
             bird.style.bottom = birdBottom + 'px';
-
-            // bird.animate({
-            //     transform: [`rotate(${currentRotation}deg)`, `rotate(${initRotation}deg)`]
-            // }, 100)
 
             bird.animate({
                 transform: [`rotate(${currentRotation}deg)`, `rotate(${initRotation}deg)`, 'rotate(90deg)']
@@ -152,101 +170,46 @@ function startGame() {
             obstacle.classList.add('obstacle');
 
             obstacle.style.top = `${randomY}px`;
-            obstacle.style.left = `${wrapper.clientWidth}px`
+            obstacle.style.left = `${wrapper.clientWidth}px`;
+            obstacle.style.zIndex = '3';
 
             obstacle.animate({
-                transform: ['translateX(0px)', `translateX(-600px)`]
-            }, 2000)
+                transform: ['translateX(0px)', `translateX(-2000px)`]
+            }, obstacleSpawnInterval * 2)
             
             obstacle.remove();
         }
     }
-}
 
-function GameOver()
-{
-    alert("Game Over!");
-}
+    class BackgroundObject {
+        constructor() {
+            const bgObj = document.createElement('div');
 
-function CheckCollision()
-{
-    const obstacles = document.querySelectorAll('.obstacle');
-    const bird_pos = document.querySelector('.bird');
+            this.setProperties(bgObj);
 
-    for (let obs of obstacles)
-    {
-        if (Compare(bird_pos, obs) === true)
-        {
-            // TODO: write function GameOver()
-            console.log("Van egy talalat.");
-            GameOver();
+            return bgObj;
+        }
+
+        setProperties(obj) {
+            let randomY = Math.floor(Math.random() * wrapper.clientHeight);
+            let randomSize = Math.floor(Math.random() * 15);
+
+
+            obj.style.position = 'absolute';
+            obj.style.top = `${randomY}px`;
+            obj.style.left = `${wrapper.clientWidth}px`
+            obj.style.width = `${randomSize}px`;
+            obj.style.height = obj.style.width;
+            obj.style.background = 'white';
+            obj.style.borderRadius = '50%';
+            obj.style.zIndex = '1';
+            obj.style.filter = `opacity(${Math.random()/2 + 0.4})`
+
+            obj.animate({
+                transform: ['translateX(0px)', `translateX(-2000px)`]
+            }, 4000)
+            
+            obj.remove();
         }
     }
 }
-
-function UpdateScore()
-{
-    let current_score = document.getElementById("score").innerHTML.substr(12);
-    let score = parseInt(current_score) + 1;
-    let new_score = score.toFixed(0).toString();
-    //let image_url = 'images/numbers/'+new_score+'.png';
-    document.getElementById("score").innerHTML = "Your score: " + new_score;
-}
-
-function Compare(bird, obstacle)
-{
-    const bt = bird.getBoundingClientRect().top;
-    const bb = bird.getBoundingClientRect().bottom;
-    const bl = bird.getBoundingClientRect().left;
-    const br = bird.getBoundingClientRect().right;
-
-    const ot = obstacle.getBoundingClientRect().top;
-    const ob = obstacle.getBoundingClientRect().bottom;
-    const ol = obstacle.getBoundingClientRect().left;
-    const or = obstacle.getBoundingClientRect().right;
-
-    let result = false;
-
-    if ((bt <= ot) && (bt >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
-    else if ((bb <= ot) && (bb >= ob) && (br <= ol) && (bl >= or)) {result = true;}
-    else if ((bt <= ot) && (bt >= ob) && (br <= ol) && (bl >= or)) {result = true;}
-    else if ((bb <= ot) && (bb >= ob) && (bl >= ol) && (bl <= or)) {result = true;}
-
-    return result;
-}
-
-/*
-function Compare_these() {
-    function getPositions( elem ) {
-        var pos, width, height;
-        pos = elem.position();
-        width = elem.clientWidth() / 2;
-        height = elem.clientHeight();
-        return [ [ pos.left, pos.left + width ], [ pos.top, pos.top + height ] ];
-    }
-
-    function comparePositions( p1, p2 ) {
-        var r1, r2;
-        r1 = p1[0] < p2[0] ? p1 : p2;
-        r2 = p1[0] < p2[0] ? p2 : p1;
-        return r1[1] > r2[0] || r1[0] === r2[0];
-    }
-
-    return function ( a, b ) {
-        var pos1 = getPositions( a ),
-            pos2 = getPositions( b );
-        console.log("Start to compare"); // idáig nem jut el a program.
-        if (comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] ))
-        {
-            console.log("The return value of Compare is true.");
-            return true;
-        }
-        else
-        {
-            console.log("The return value of Compare is false.");
-            return false;
-        }
-        //return (comparePositions( pos1[0], pos2[0] ) && comparePositions( pos1[1], pos2[1] ));
-    };
-}
-*/
