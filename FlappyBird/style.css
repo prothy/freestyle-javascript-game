@@ -1,8 +1,3 @@
-/*  TODO: score set to zero when restart
-    TODO: add record message to the others instead of alert
- */
-
-
 :root {
   --game-width: 500px;
 }

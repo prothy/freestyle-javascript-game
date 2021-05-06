@@ -1,6 +1,7 @@
 'use strict';
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
     startGame()
 })
@@ -9,6 +10,7 @@ function startGame() {
     const bird = document.querySelector('.bird');
     const gameDisplay = document.querySelector('.game-container');
     const wrapper = document.querySelector('.wrapper');
+
 
 
     /* PHSYICS CONSTANTS */
