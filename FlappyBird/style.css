@@ -40,7 +40,7 @@
 }
 
 .game-container {
-    position: absolute;
+    margin: auto;
     width: 454px;
     height: 550px;
     overflow: hidden;
@@ -68,7 +68,7 @@
 .bird {
     --bird-width: 60px;
     position: absolute;
-    left: calc(30% - (var(--bird-width)/2));
+    left: calc(45% - (var(--bird-width)/2));
     width: var(--bird-width);
     height: 33px;
 
