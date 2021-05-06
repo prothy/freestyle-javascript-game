@@ -1,3 +1,13 @@
+/*  TODO: delete commented program parts
+    TODO: fix problem: background sliding down when game starts --> fixed
+    TODO: fix problem: stars and meteors disappear
+    TODO: fix problem: Game Over doesn't disappear, when game restarts --> fixed
+    TODO: set score to 0 when game restarts --> fixed
+    TODO: fix problem: "Press space" text is nearly invisible --> fixed
+    TODO: lower the space between game-title and score box. They can appear in the same line. --> almost done
+ */
+
+
 :root {
   --game-width: 500px;
 }
@@ -20,18 +30,9 @@
 }
 
 .sliding-background {
-    /*width: 1362px;
-    height: 482px;*/
-    /*background: url("images/space_background.jpg") repeat-x;*/
-    animation: slide 10s linear infinite;/*
-    background: rgb(156, 1, 86);*/
-    /*width: 500px;
-    height: 500px;*/
-/*=======*/
-    /*background: rgb(156, 1, 86);*/
+    animation: slide 10s linear infinite;
     width: var(--game-width);
     height: var(--game-width);
-/*>>>>>>> 189196f1cfb7d01f6394fe927eeb50f8bcae428b*/
 }
 
 .game-title {
@@ -45,15 +46,15 @@
 
 .score-container {
     top: 0px;
-    left: 280px;
-    right: 454px;
+    float: right;
+    display: inline-block;
 }
 
 .score {
     font-weight: bold;
-    font-size: large;
+    font-size: 40%;
     text-align: right;
-    text-shadow:  2px 2px 2px purple;
+    text-shadow: 2px 2px 2px purple;
     color: white;
     line-height: 200%;
 }
@@ -75,21 +76,13 @@
 }
 
 .start-game {
-  --width: 122px;
-
-  position: absolute;
-
-  top: 50%;
-  left: calc(50% - (var(--width)/2));
-}
-
-.game-over {
-    width: 533px;
-    height: 300px;
-    margin: auto;
-    visibility: hidden;
-    position: center;
-    background-image: url("images/game-over.jpg");
+    --width: 200px;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 100px);
+    font-size: 150%;
+    color: white;
+    text-align: center;
 }
 
 .bird {

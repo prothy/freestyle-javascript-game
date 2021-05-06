@@ -69,7 +69,9 @@ function startGame() {
         currentRotation = 0;
         initRotation = 0;
         document.querySelector('.start-game').style.display = 'initial';
-        document.querySelector('.game-over').style.visibility = 'visible';
+        document.getElementById('start').innerHTML = "Game Over!" + '<br>' + "Press space to try again";
+        document.getElementById('score').innerHTML = 'Your score: 0';
+
     }
 
     function checkCollision()
