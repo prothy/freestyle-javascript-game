@@ -41,10 +41,9 @@ function startGame() {
         if (gameStarted) {
            
             updateScore();
-
-            if ((startTime - curTime) % 2000 === 0) {
-                wrapper.appendChild(new Obstacle());
-            }
+            if ((startTime - curTime) % 2000 === 0) wrapper.appendChild(new Obstacle());
+            if ((startTime - curTime) % (Math.floor((Math.random() * 150))) === 0) wrapper.appendChild(new BackgroundObject());
+            
             console.log(currentRotation);
             checkCollision();
             if (birdBottom <= 0) gameOver()
@@ -56,8 +55,12 @@ function startGame() {
     function gameOver()
     {
         gameStarted = false;
-        alert("Game Over!\nYou lost!");
+        // alert("Game Over!\nYou lost!");
         birdBottom = birdInitPos;
+        // bird.animate = 'none';
+        currentRotation = 0;
+        initRotation = 0;
+        document.querySelector('.start-game').style.display = 'initial';
     }
 
     function checkCollision()
@@ -85,7 +88,7 @@ function startGame() {
         const br = bird.getBoundingClientRect().right;
 
         const ot = obstacle.getBoundingClientRect().top - tolerance;
-        const ob = obstacle.getBoundingClientRect().bottom + tolerance;
+        const ob = obstacle.getBoundingClientRect().bottom + tolerance + 20;
         const ol = obstacle.getBoundingClientRect().left + tolerance;
         const or = obstacle.getBoundingClientRect().right - tolerance;
 
@@ -146,13 +149,46 @@ function startGame() {
             obstacle.classList.add('obstacle');
 
             obstacle.style.top = `${randomY}px`;
-            obstacle.style.left = `${wrapper.clientWidth}px`
+            obstacle.style.left = `${wrapper.clientWidth}px`;
+            obstacle.style.zIndex = '3';
 
             obstacle.animate({
                 transform: ['translateX(0px)', `translateX(-600px)`]
             }, 2000)
             
             obstacle.remove();
+        }
+    }
+
+    class BackgroundObject {
+        constructor() {
+            const bgObj = document.createElement('div');
+
+            this.setProperties(bgObj);
+
+            return bgObj;
+        }
+
+        setProperties(obj) {
+            let randomY = Math.floor(Math.random() * wrapper.clientHeight);
+            let randomSize = Math.floor(Math.random() * 15);
+
+
+            obj.style.position = 'absolute';
+            obj.style.top = `${randomY}px`;
+            obj.style.left = `${wrapper.clientWidth}px`
+            obj.style.width = `${randomSize}px`;
+            obj.style.height = obj.style.width;
+            obj.style.background = 'white';
+            obj.style.borderRadius = '50%';
+            obj.style.zIndex = '1';
+            obj.style.filter = `opacity(${Math.random()/2 + 0.4})`
+
+            obj.animate({
+                transform: ['translateX(0px)', `translateX(-600px)`]
+            }, 1000)
+            
+            obj.remove();
         }
     }
 }

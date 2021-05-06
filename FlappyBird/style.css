@@ -13,13 +13,14 @@
 
 .wrapper {
   overflow: hidden;
+  background: rgb(156, 1, 86);
 }
 
 .sliding-background {
     width: 1362px;
     height: 482px;
-    background: url("images/space_background.jpg") repeat-x;
-    animation: slide 10s linear infinite;
+    /* background: url("images/space_background.jpg") repeat-x; */
+    /* animation: slide 10s linear infinite; */
 }
 
 .score-container {
@@ -67,6 +68,7 @@
     left: calc(30% - (var(--bird-width)/2));
     width: var(--bird-width);
     height: 33px;
+    z-index: 2;
 
     background-image: url("images/UFO_spaceship.png");
 }
