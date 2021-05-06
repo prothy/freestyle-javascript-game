@@ -21,7 +21,7 @@ function startGame() {
     let rotationTimer, currentRotation;
     let initRotation = 0;
     
-    let obstacleSpawnInterval = 8000;
+    let obstacleSpawnInterval = 4000;
 
     let gameStarted = false;
 
@@ -45,7 +45,7 @@ function startGame() {
             let timeCheck = startTime - curTime;
             if ((timeCheck) % 2000 === 0) wrapper.appendChild(new Obstacle());
             if ((timeCheck) % (Math.floor((Math.random() * 150))) === 0) wrapper.appendChild(new BackgroundObject());
-            if ((timeCheck) % 5000 === 0 && obstacleSpawnInterval > 600) obstacleSpawnInterval -= 200;
+            if ((timeCheck) % obstacleSpawnInterval === 0 && obstacleSpawnInterval > 1400) obstacleSpawnInterval -= 400;
             checkCollision()
             score_counter += 1;
             if (score_counter === 50)
@@ -169,7 +169,7 @@ function startGame() {
 
             obstacle.animate({
                 transform: ['translateX(0px)', `translateX(-2000px)`]
-            }, obstacleSpawnInterval)
+            }, obstacleSpawnInterval * 2)
             
             obstacle.remove();
         }
