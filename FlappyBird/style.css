@@ -42,12 +42,12 @@
 .game-container {
     margin: auto;
     width: 454px;
-    height: 550px;
+    height: auto;
     overflow: hidden;
 }
 
 .obstacle {
-  position: absolute;
+  margin: auto;
   left: 100%;
 
   width: 112px;
@@ -71,6 +71,7 @@
     left: calc(45% - (var(--bird-width)/2));
     width: var(--bird-width);
     height: 33px;
+    overflow: hidden;
 
     background-image: url("images/UFO_spaceship.png");
 }
