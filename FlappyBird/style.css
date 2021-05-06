@@ -39,6 +39,11 @@
     color: black;
 }
 
+.highscore-cintainer {
+    float: left;
+    display: inline-block;
+}
+
 .score-container {
     float: right;
     display: inline-block;

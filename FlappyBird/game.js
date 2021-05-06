@@ -66,10 +66,23 @@ function startGame() {
         birdBottom = birdInitPos;
         currentRotation = 0;
         initRotation = 0;
-        document.querySelector('.start-game').style.display = 'initial';
-        document.getElementById('start').innerHTML = "Game Over!" + '<br>' + "Press space to try again";
-        document.getElementById('score').innerHTML = 'Your score: 0';
 
+        let score_str = document.getElementById('score').innerHTML;
+        let score_int = parseInt(score_str.substr(12));
+        let highscore = document.getElementById('highscore').innerHTML;
+        let highscore_int = parseInt(highscore.substr(15));
+
+        let message = score_str + '<br>' + "Game Over!" + '<br>' + "Press space to try again";
+
+        if (score_int > highscore_int)
+        {
+            highscore = "Highest score: " + score_int.toString();
+            document.getElementById("highscore").innerHTML = highscore;
+            alert("New Record: " + score_int.toString());
+        }
+        document.querySelector('.start-game').style.display = 'initial';
+        document.getElementById('start').innerHTML = message;
+        document.getElementById('score').innerHTML = 'Your score: 0';
     }
 
     function checkCollision()
@@ -106,9 +119,9 @@ function startGame() {
     {
 
         let current_score = document.getElementById("score").innerHTML.substr(12);
-    let score = parseInt(current_score) + 1;
-    let new_score = score.toFixed(0).toString();
-    document.getElementById("score").innerHTML = "Your score: " + new_score;
+        let score = parseInt(current_score) + 1;
+        let new_score = score.toFixed(0).toString();
+        document.getElementById("score").innerHTML = "Your score: " + new_score;
     }
 
     function jump(e) {
