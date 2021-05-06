@@ -24,7 +24,7 @@ const game = {
     createBoard: function () {
         for (let i = 0; i < this.boardWidth * this.boardWidth; i++) {
             const square = document.createElement('div');
-            square.innerHTML = '0';
+            square.textContent = '0';
             this.gridDisplay.appendChild(square);
             this.squares.push(square);
         }
@@ -35,8 +35,8 @@ const game = {
 
     generate: function () {
         let randomNumber = Math.floor(Math.random() * this.squares.length)
-        if (this.squares[randomNumber].innerHTML === '0') {
-            this.squares[randomNumber].innerHTML = '2';
+        if (this.squares[randomNumber].textContent === '0') {
+            this.squares[randomNumber].textContent = '2';
             this.checkForGameOver();
         } else this.generate();
         this.updateColors();
@@ -47,13 +47,13 @@ const game = {
         for (let i of rowStartIndices) {
             const rowIndices = [i, i + 1, i + 2, i + 3];
             const row = rowIndices.map(index => this.squares[index]);
-            const rowContents = row.map(square => parseInt(square.innerHTML));
+            const rowContents = row.map(square => parseInt(square.textContent));
 
             const nonZeroSquares = rowContents.filter(num => num);
             const zeroes = Array(this.boardWidth - nonZeroSquares.length).fill(0);
             const newRow = direction === "right" ? zeroes.concat(nonZeroSquares) : nonZeroSquares.concat(zeroes);
 
-            row.map((square, i) => square.innerHTML = newRow[i].toString());
+            row.map((square, i) => square.textContent = newRow[i].toString());
         }
 
     },
@@ -63,13 +63,13 @@ const game = {
         for (let i of colStartIndices) {
             const colIndices = [i, i + this.boardWidth, i + (this.boardWidth * 2), i + (this.boardWidth * 3)];
             const col = colIndices.map(index => this.squares[index]);
-            const colContents = col.map(square => parseInt(square.innerHTML));
+            const colContents = col.map(square => parseInt(square.textContent));
 
             const nonZeroSquares = colContents.filter(num => num);
             const zeroes = Array(this.boardWidth - nonZeroSquares.length).fill(0);
             const newCol = direction === "down" ? zeroes.concat(nonZeroSquares) : nonZeroSquares.concat(zeroes);
 
-            col.map((square, i) => square.innerHTML = newCol[i].toString());
+            col.map((square, i) => square.textContent = newCol[i].toString());
         }
     },
 
@@ -96,12 +96,12 @@ const game = {
     },
 
     combine: function (firstSquare, secondSquare) {
-        if (firstSquare.innerHTML === secondSquare.innerHTML) {
-            const combinedTotal = parseInt(firstSquare.innerHTML) + parseInt(secondSquare.innerHTML)
-            firstSquare.innerHTML = combinedTotal.toString();
-            secondSquare.innerHTML = "0";
+        if (firstSquare.textContent === secondSquare.textContent) {
+            const combinedTotal = parseInt(firstSquare.textContent) + parseInt(secondSquare.textContent)
+            firstSquare.textContent = combinedTotal.toString();
+            secondSquare.textContent = "0";
             this.score += combinedTotal;
-            this.scoreDisplay.innerHTML = this.score.toString();
+            this.scoreDisplay.textContent = this.score.toString();
 
             // store score to local storage if higher
             this.updateLocalScore();
@@ -141,18 +141,18 @@ const game = {
 
     // Look for the number 2048 in the array to invoke the win condition:
     checkForWin: function () {
-        const winningSquares = this.squares.some(square => square.innerHTML === "2048");
-        if (winningSquares.length) {
-            this.resultDisplay.innerHTML = "You have won the game! Congratulations!";
+        const winningSquares = this.squares.some(square => square.textContent === "2048");
+        if (winningSquares) {
+            this.resultDisplay.textContent = "You have won the game! Congratulations!";
             document.removeEventListener('keyup', handler);
         }
     },
 
     // Looks for the zeros on the board for lose condition:
     checkForGameOver: function () {
-        const zeroes = this.squares.filter(square => square.innerHTML === "0");
+        const zeroes = this.squares.filter(square => square.textContent === "0");
         if (!zeroes.length) {
-            this.resultDisplay.innerHTML = 'You lose. Better luck new time.';
+            this.resultDisplay.textContent = 'You lose. Better luck new time.';
             document.removeEventListener('keyup', handler);
         }
 
@@ -175,7 +175,7 @@ const game = {
         }
 
         for (let square of this.squares) {
-            square.style.backgroundColor = colorLookup[square.innerHTML];
+            square.style.backgroundColor = colorLookup[square.textContent];
         }
     },
 
