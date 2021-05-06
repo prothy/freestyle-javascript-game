@@ -100,15 +100,15 @@ function startGame() {
 
     function compare(bird, obstacle)
     {
-        const tolerance = 80;
+        const tolerance = 10;
 
-        const bt = bird.getBoundingClientRect().top ;
+        const bt = bird.getBoundingClientRect().top;
         const bb = bird.getBoundingClientRect().bottom;
         const bl = bird.getBoundingClientRect().left;
         const br = bird.getBoundingClientRect().right;
 
-        const ot = obstacle.getBoundingClientRect().top - tolerance;
-        const ob = obstacle.getBoundingClientRect().bottom + tolerance + 20;
+        const ot = obstacle.getBoundingClientRect().top + tolerance;
+        const ob = obstacle.getBoundingClientRect().bottom - tolerance;
         const ol = obstacle.getBoundingClientRect().left + tolerance;
         const or = obstacle.getBoundingClientRect().right - tolerance;
 
