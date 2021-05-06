@@ -21,7 +21,7 @@ function startGame() {
     let rotationTimer, currentRotation;
     let initRotation = 0;
     
-    let obstacleSpawnInterval = 2000;
+    let obstacleSpawnInterval = 8000;
 
     let gameStarted = false;
 
@@ -160,7 +160,7 @@ function startGame() {
             obstacle.style.zIndex = '3';
 
             obstacle.animate({
-                transform: ['translateX(0px)', `translateX(-600px)`]
+                transform: ['translateX(0px)', `translateX(-2000px)`]
             }, obstacleSpawnInterval)
             
             obstacle.remove();
@@ -192,8 +192,8 @@ function startGame() {
             obj.style.filter = `opacity(${Math.random()/2 + 0.4})`
 
             obj.animate({
-                transform: ['translateX(0px)', `translateX(-600px)`]
-            }, 1000)
+                transform: ['translateX(0px)', `translateX(-2000px)`]
+            }, 4000)
             
             obj.remove();
         }
